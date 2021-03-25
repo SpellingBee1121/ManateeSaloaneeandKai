@@ -9,8 +9,14 @@ public class SeaGrass : MonoBehaviour
     public void Eat()
     {
         needs.Feed();
-        gameObject.SetActive(false);
-
+        transform.Find("default").gameObject.SetActive(false);
+        StartCoroutine("Regrow");
         // Optional: Play munching sound
+    }
+
+    private IEnumerator Regrow()
+    {
+        yield return new WaitForSeconds(2);
+        transform.Find("default").gameObject.SetActive(true);
     }
 }
