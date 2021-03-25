@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BoatMovement : MonoBehaviour
 {
-	private float speed;
+	private int time;
+    private Vector3 curVel = new Vector3(0f, 0f, 0f);
 	private System.Random random = new System.Random();
-	public int minSpeed = 1;
-	public int maxSpeed = 5;
+	public int minTime = 1;
+	public int maxTime = 5;
 	public Transform startPos;
 	public Transform endPos;
     // Start is called before the first frame update
@@ -19,20 +20,17 @@ public class BoatMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startPos.position.x > endPos.position.x) {
-			transform.position = transform.position + (Vector3.left * speed);
-			if (transform.position.x < endPos.position.x)
-				Reset();
-		}
-		else {
-			transform.position = transform.position + (Vector3.right * speed);
-			if (transform.position.x > endPos.position.x)
-				Reset();
-		}
+        transform.position = Vector3.SmoothDamp(transform.position, endPos.position, ref curVel, time);
+
+        if (Vector3.Distance(transform.position, endPos.position) <= 0.5)
+        {
+            Reset();
+        }
     }
 	
 	private void Reset() {
 		transform.position = startPos.position;
-		speed = random.Next(minSpeed, maxSpeed) / 10f;
+		time = random.Next(minTime, maxTime);
+        curVel = new Vector3(0f, 0f, 0f);
 	}
 }
