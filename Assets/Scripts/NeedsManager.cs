@@ -9,6 +9,13 @@ public class NeedsManager : MonoBehaviour
     public float food = 1f;
     public float social = 1f;
 
+    //adding GUI
+
+   // float airWindow = EditorGUI.IntSlider(new Rect(3, 3, position.width - 6, 15), "Air", Mathf.RoundToInt(air), 0, 100);
+   // float foodWindow = EditorGUI.IntSlider(new Rect(3, 25, position.width - 6, 15), "Food", Mathf.RoundToInt(food), 0, 100);
+
+   // public float airLoad = 
+
     // How long it takes for each need to go from 1 to 0.
     public float airTimer = 20f;
     public float foodTimer = 10f;
@@ -22,7 +29,17 @@ public class NeedsManager : MonoBehaviour
     // Is the manatee breathing right now?
     private bool breathing = false;
 
+    
     // Start is called before the first frame update
+
+        
+/*       static void Init()
+    {
+        NeedsManager window = GetWindow(typeof(EditorGUIProgressBar), false, "DisplayInfo");
+        window.Show();
+    }
+
+  */
     void Start()
     {
         
@@ -60,4 +77,5 @@ public class NeedsManager : MonoBehaviour
         social += 0.2f;
         social = Mathf.Clamp(social, 0f, 1f);
     }
+
 }

@@ -7,10 +7,13 @@ public class ManateeSocial : MonoBehaviour
     private GameObject heart;
     public NeedsManager needs;
 
+    public AudioSource msound;
+
     // Start is called before the first frame update
     void Start()
     {
         heart = transform.Find("Heart").gameObject;
+        msound =  GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -19,6 +22,7 @@ public class ManateeSocial : MonoBehaviour
         needs.Socialize();
         heart.SetActive(true);
         StartCoroutine("HeartStop");
+        msound.Play();
     }
 
     private IEnumerator HeartStop()
