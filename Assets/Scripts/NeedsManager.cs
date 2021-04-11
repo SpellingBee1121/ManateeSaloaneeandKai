@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class NeedsManager : MonoBehaviour
 {
@@ -9,10 +11,15 @@ public class NeedsManager : MonoBehaviour
     public float food = 1f;
     public float social = 1f;
 
-    // How long it takes for each need to go from 1 to 0.
+    // How long it takes for each need to go from 1 to 0. Not working in terms of seconds right now but it's fine.
     public float airTimer = 20f;
     public float foodTimer = 10f;
     public float socialTimer = 30f;
+	
+	// Text display for needs
+	public TextMeshPro airCounter;
+	public TextMeshPro foodCounter;
+	public TextMeshPro socialCounter;
 
     // Used for interpolation calculations
     private float airVelocity = 0f;
@@ -42,6 +49,8 @@ public class NeedsManager : MonoBehaviour
         
         food = Mathf.SmoothDamp(food, 0f, ref foodVelocity, foodTimer);
         social = Mathf.SmoothDamp(social, 0f, ref socialVelocity, socialTimer);
+		
+		UpdateText();
     }
 
     public void Feed()
@@ -60,4 +69,11 @@ public class NeedsManager : MonoBehaviour
         social += 0.2f;
         social = Mathf.Clamp(social, 0f, 1f);
     }
+	
+	private void UpdateText() 
+	{
+		airCounter.text = (Mathf.RoundToInt(air * 100)).ToString() + "%";
+		foodCounter.text = (Mathf.RoundToInt(food * 100)).ToString() + "%";
+		socialCounter.text = (Mathf.RoundToInt(social * 100)).ToString() + "%";
+	}
 }

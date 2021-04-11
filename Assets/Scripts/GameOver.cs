@@ -15,7 +15,7 @@ public class GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (needs.air <= 0.05 || needs.food <= 0.05 || needs.social <= 0.05)
+        if (Mathf.RoundToInt(needs.air*100) == 0 || Mathf.RoundToInt(needs.food*100) == 0 || Mathf.RoundToInt(needs.social*100) == 0)
         {
             EndGame();
         }
